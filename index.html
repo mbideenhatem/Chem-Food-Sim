@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Chem Food Sim</title>
+    </head>
+    <body style="background-color: white;">
+
+        <!-- The title of the website-->
+        <h1 style="font-size: 20px; text-align: center;" id = "debugger">Chemistry in Food Simulation</h1>
+
+        <!-- The line seperating the title from the rest-->
+        <hr>
+
+        <div style = "display: flex; justify-content: center; width: 100%">
+            <div style = "margin: 23px;">
+                <div style="display: flex; height: 575px; border: 2px solid black;">
+                    <!--buttons-->
+                    <div style="border-right: 2px solid black; height: 100%; width: 400px; display: flex; flex-direction: column;">
+                       
+                        <div style="font-size:20px; height: 80px; display: flex; border-bottom: 2px solid black">
+                            <div onclick="CheckedBoxes()" style="display: flex; justify-content: center; align-items: center; width: 100%; column-gap: 20px">
+                                    <div style="height: min-content">
+                                        <label>Dough
+                                            <input type="radio" checked="checked" name="radio" id="dough" style="cursor: pointer;">
+                                           <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div style="height: min-content">
+                                        <label>Yoghurt
+                                            <input type="radio" name="radio" id="yoghurt" style="cursor: pointer;">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                            </div>    
+                        </div>
+                        
+                        
+                        
+                        <div style="display: flex; flex-direction: column; height: 100%;" >
+                            
+                            <div onclick="CheckedLesserBoxes()" style="display: flex; flex-direction: column; align-items:center; align-content: center; margin-top: 8px">
+                                
+                                <div style = "display: flex; flex-direction: column; align-items: flex-end">
+                                    <div>
+                                        <label class="container"> <span id="label1">option1</span>
+                                            <input type="radio" checked="checked" name="radio1" id="option1" style="cursor: pointer;">
+                                           <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <label class="container"> <span id="label2">option2</span>
+                                            <input type="radio" name="radio1" id="option2" style="cursor: pointer;">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="flex-grow: 1; align-content: flex-end; margin-bottom: 20px">
+                               <div style = "display: flex; justify-content: center; align-items: center; ">
+                                    <button id = "playSim" style="font-size: 30px; text-align: center; background-color: #00FF00; color: grey; border-color: lime; border-radius: 50%; cursor: pointer;">▶</button>   
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!--simulation-->
+                    <div class="simulation" style="background-color:#e5feff; width: 575px;">
+                        
+                        <img id = "simscreen" src = "img/stopsign.png" style="object-fit: scale-down; height: 100%; width: 100%;">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <script>
+        
+            x = 0
+            y = 0;
+            
+            function renderSimScreen() {
+                
+                let newimage = document.getElementById("simscreen");
+                
+                if (x == 0) {
+                newimage.src =  "img/bowldough.png"
+                } else {
+                newimage.src = "img/yogurtfirstframe.png"
+                }
+                
+            }
+            
+
+            function CheckedBoxes(){
+                if(document.getElementById("dough").checked){
+                    x = 0;
+                    document.getElementById("label1").textContent = "With Gluten";
+                    document.getElementById("label2").textContent = "No Gluten";
+                }
+                else{
+                    x = 1;
+                    document.getElementById("label1").textContent = "Pasteurized";
+                    document.getElementById("label2").textContent = "Raw";
+                }
+                
+                renderSimScreen();
+            }
+
+            function CheckedLesserBoxes(){
+
+                if(document.getElementById("option1").checked){
+                    y = 0;
+                }
+                else{
+                    y = 1;
+                }
+
+                //document.getElementById("simscreen").textContent = y;
+
+            }
+            
+            
+            function renderSimScreenAnim() {
+                let newimage = document.getElementById("simscreen");
+                
+                if (x == 0) {
+                    
+                    if (y == 0) {
+                        newimage.src = "img/doughwithgluten.gif";
+                    }
+                    else {
+                        newimage.src = "img/doughwithoutgluten.gif"; 
+                    }  
+                }
+                else {
+                    
+                    if (y == 0) {
+                        newimage.src = "img/yogurtpastloop.gif";   
+                    }
+                    else {
+                        newimage.src = "img/yogurtrawloop.gif";   
+                    }
+                    
+                }
+                
+            }
+            
+            document.getElementById("playSim").addEventListener("click", renderSimScreenAnim);
+            
+            CheckedBoxes();
+            CheckedLesserBoxes();
+            
+            
+
+
+
+            
+        </script>
+
+
+    </body>
+</html>
